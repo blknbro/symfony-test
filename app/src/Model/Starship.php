@@ -47,7 +47,7 @@ class Starship
 
     public function getStatusImageFilename():string
     {
-        match ($this->status){
+        return match ($this->status){
             StarshipStatusEnum::WAITING => 'images/starship1.jpg',
             StarshipStatusEnum::COMPLETED => 'images/starship2.jpg',
             StarshipStatusEnum::IN_PROGRESS => 'images/starship1.jpg'
