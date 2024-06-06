@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}to main page!{% endblock %}
+
+
+{% block body %}
+    <h1>This is the response. wow</h1>
+
+    <div>
+        <p>Browse through {{ ships|length }} starships!</p>
+
+        {% if ships|length > 2 %}
+            <p>wowow.</p>
+        {% endif %}
+    </div>
+
+
+    <div>
+        <h2>My ship</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>
+                    <a href="{{ path('app_starship_show',{id : myShip.id}) }}">{{ myShip.name|upper }}</a>
+
+                </td>
+            </tr>
+            <tr>
+                <th>Class</th>
+                <td>{{ myShip.class }}</td>
+            </tr>
+            <tr>
+                <th>Captain</th>
+                <td>{{ myShip.captain }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ myShip.status.value }}</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h2>Other ships</h2>
+        {% for ship in ships %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>
+                    <a href="{{ path('app_starship_show',{id : ship.id}) }}">{{ ship.name|upper }}</a>
+
+                </td>
+            </tr>
+            <tr>
+                <th>Class</th>
+                <td>{{ ship.class }}</td>
+            </tr>
+            <tr>
+                <th>Captain</th>
+                <td>{{ ship.captain }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ ship.statusString }}</td>
+            </tr>
+            <tr>
+                <td><img src="{{ ship.StatusImageFilename }}" alt="{{ ship.statusString }}"></td>
+            </tr>
+        </table>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
