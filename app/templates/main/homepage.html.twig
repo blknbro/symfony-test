@@ -4,7 +4,7 @@
 
 
 {% block body %}
-    <h1>This is the response. wow</h1>
+    <h1><a href="{{ path('app_homepage') }}">Go home</a></h1>
 
     <div>
         <p>Browse through {{ ships|length }} starships!</p>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ myShip.status.value }}</td>
+                <td>{{ myShip.statusString }}</td>
             </tr>
         </table>
     </div>
@@ -63,7 +63,7 @@
                 <td>{{ ship.statusString }}</td>
             </tr>
             <tr>
-                <td><img src="{{ asset(ship.StatusImageFilename) }}" alt="{{ ship.statusString }}"></td>
+                <td><img src="{{ asset(ship.StatusImageFilename) }}" alt="{{ ship.statusString }}" style="max-height: 250px; max-width: 150px"></td>
             </tr>
         </table>
             <hr>

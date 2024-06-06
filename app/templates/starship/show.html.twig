@@ -3,6 +3,9 @@
 {% block title %}{{ ship.name }}{% endblock %}
 
 {% block body %}
+    <div>
+        <a href="{{ path('app_homepage') }}">Go back</a>
+    </div>
 <h1>{{ ship.name }}</h1>
 <table>
     <tr>
@@ -15,7 +18,7 @@
     </tr>
     <tr>
         <th>Status</th>
-        <td>{{ ship.status }}</td>
+        <td>{{ ship.statusString }}</td>
     </tr>
 </table>
 
