@@ -59,6 +59,9 @@
 </nav>
 <!-- End Main Navigation -->
 
+{% for message in app.flashes('success') %}
+    <div>{{ message }}</div>
+{% endfor %}
 {% block body %}{% endblock %}
 
 <!-- Footer -->

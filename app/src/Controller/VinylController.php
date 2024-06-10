@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\VinylMixRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -41,10 +42,10 @@ class VinylController extends AbstractController
     {
 
 
-        $genre = $slug ? u(str_replace('-',' ',$slug))->title(true) : null;
+        $genre = $slug ?: null;
 
 
-        $mixes = $mixRepository->findBy([],['votes'=>'DESC']);
+        $mixes = $mixRepository->findAllOrderedByVotes($slug);
 
 
         return $this->render('vinyl/browse.html.twig', [
@@ -53,6 +54,8 @@ class VinylController extends AbstractController
         ]);
 
     }
+
+
 
 
 
