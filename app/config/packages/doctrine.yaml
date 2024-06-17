@@ -23,6 +23,18 @@ doctrine:
                 prefix: 'App\Entity'
                 alias: App
 
+        filters:
+            fortuneCookie_discontinued:
+                class: App\Doctrine\DiscontinuedFilter
+                enabled: true
+                parameters:
+                    discontinued: false
+
+        dql:
+            numeric_functions:
+                rand: DoctrineExtensions\Query\Mysql\Rand
+
+
         controller_resolver:
             auto_mapping: false
 

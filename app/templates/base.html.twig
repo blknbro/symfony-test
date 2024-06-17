@@ -21,7 +21,7 @@
 
 <!-- Main Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark  mb-5" style="background-color: #27333A;">
-    <div class="container-fluid">
+    <div class="container-fluid" style="color: #000; text">
         <a class="navbar-brand" href="{{ path('app_homepage_vinyl') }}">
             <i class="fas fa-record-vinyl"></i>
             Mixed Vinyl
@@ -30,9 +30,13 @@
             <i class="fas fa-record-vinyl"></i>
             Home
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="{{ path('app_fortune_home') }}">
+            <i class="fas fa-record-vinyl"></i>
+            Fortune
+        </a>
+        <form action="{{ path('app_fortune_home') }}">
+            <input type="text" id="search-navbar" name="q" value="{{ app.request.query.get('q') }}" placeholder="Search..." class="block w-full p-2 pl-10 text-sm border rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+        </form>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -48,8 +52,8 @@
                         <i class="fas fa-user-astronaut p-2" style="border: solid 1px #fff; border-radius: 50px; font-size: 40px;"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">My Mixes</a></li>
-                        <li><a class="dropdown-item" href="#">Signout</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_login') }}">Log In</a></li>
+                        <li><a class="dropdown-item" href="#">Sign up</a></li>
                     </ul>
                 </li>
                 <!-- End If Authenticated -->

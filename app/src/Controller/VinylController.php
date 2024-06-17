@@ -43,11 +43,7 @@ class VinylController extends AbstractController
     #[Route('/browse/{slug}',name: 'app_browse')]
     public function browse(VinylMixRepository $mixRepository, Request $request ,string $slug = null): Response
     {
-
-
         $genre = $slug ?: null;
-
-
 
         $queryBuilder = $mixRepository->createOrderedByVotesQueryBuilder($slug);
         $adapter = new QueryAdapter($queryBuilder);
