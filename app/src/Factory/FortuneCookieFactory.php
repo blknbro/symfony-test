@@ -38,6 +38,7 @@ final class FortuneCookieFactory extends PersistentProxyObjectFactory
             'discontinued' => self::faker()->boolean(),
             'fortune' => self::faker()->text(255),
             'numberPrinted' => self::faker()->randomNumber(),
+            'owner' => UserFactory::random()
         ];
     }
 

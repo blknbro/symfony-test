@@ -12,17 +12,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class FortuneController extends AbstractController
+class FortuneController extends BaseController
 {
 
-    #[Route('/fortune', name: 'app_fortune_home')]
+
+    #[Route('/fortune', name: 'app_fortune_home',)]
+    #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
     public function index(CategoryRepository $repository, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
 //        $entityManager->getFilters()
 //            ->enable('fortuneCookie_discontinued')
 //            ->setParameter('discontinued', false);
+
         $searchTerm = $request->query->get('q');
+
+        $logger->info('{user} is voting',[
+            'user' => $this->getUser()->getEmail()
+        ]);
 
 
         if ($searchTerm) {
@@ -35,6 +43,7 @@ class FortuneController extends AbstractController
         return $this->render('fortune/homepage.html.twig', [
             'categories' => $categories,
         ]);
+
     }
 
     #[Route('/fortune/category/{id}', name: 'app_category_show')]
@@ -53,6 +62,14 @@ class FortuneController extends AbstractController
             'fortunesAverage' => $stats->fortunesAverage,
             'categoryName' => $stats->categoryName,
         ]);
+    }
+
+    #[Route(path: '/fortune/info')]
+    public function fortuneInfo()
+    {
+         $this->denyAccessUnlessGranted('ROLE_COOKIE_ADMIN');
+
+        return new Response('Pretend something is here.');
     }
 
 

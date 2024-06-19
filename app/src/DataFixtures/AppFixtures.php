@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Factory\CategoryFactory;
 use App\Factory\FortuneCookieFactory;
 use App\Factory\UserFactory;
@@ -12,6 +13,18 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+        UserFactory::createOne([
+            'email' => 'abraca_admin@example.com',
+            'roles' => ['ROLE_ADMIN']
+        ]);
+        UserFactory::createOne([
+            'email' => 'abraca_user@example.com',
+            'roles' => ['ROLE_USER']
+        ]);
+        UserFactory::createMany(10);
+
+
         $jobCategory = CategoryFactory::new()->create([
             'name' => 'Job',
             'iconKey' => 'fa-dollar'
@@ -22,10 +35,7 @@ class AppFixtures extends Fixture
                      'You laugh now, wait til you get home.',
                      'If your work is not finished, blame it on the computer.',
                  ] as $fortune) {
-            FortuneCookieFactory::new()->create([
-                'fortune' => $fortune,
-                'category' => $jobCategory,
-            ]);
+            FortuneCookieFactory::new()->create();
         }
         $lunchCategory = CategoryFactory::new()->create([
             'name' => 'Lunch',
@@ -104,9 +114,7 @@ class AppFixtures extends Fixture
             ]);
         }
 
-        UserFactory::createOne(['email' => 'abraca_admin@example.com']);
-        UserFactory::createMany(10);
 
+        }
 
-    }
 }
