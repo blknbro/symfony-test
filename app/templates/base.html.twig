@@ -58,6 +58,10 @@
                 <i class="fas fa-record-vinyl"></i>
                 Logout
             </a>
+            <a class="navbar-brand" href="{{ path('app_2fa_enable') }}">
+                <i class="fas fa-record-vinyl"></i>
+                Enable 2fa
+            </a>
         </div>
 
         {% else %}
@@ -103,6 +107,9 @@
 
 {% for message in app.flashes('success') %}
     <div>{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="danger">{{ message }}</div>
 {% endfor %}
 {% block body %}{% endblock %}
 

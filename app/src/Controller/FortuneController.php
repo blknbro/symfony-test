@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\FortuneCookie;
 use App\Repository\CategoryRepository;
 use App\Repository\FortuneCookieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,12 +20,13 @@ class FortuneController extends BaseController
 
 
     #[Route('/fortune', name: 'app_fortune_home',)]
-    #[IsGranted("IS_AUTHENTICATED_REMEMBERED")]
     public function index(CategoryRepository $repository, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
 //        $entityManager->getFilters()
 //            ->enable('fortuneCookie_discontinued')
 //            ->setParameter('discontinued', false);
+
+        $this->denyAccessUnlessGranted('EDIT', $repository);
 
         $searchTerm = $request->query->get('q');
 
@@ -53,6 +55,12 @@ class FortuneController extends BaseController
         if (!$category) {
             throw $this->createNotFoundException("category not found");
         }
+
+//        if($category->getFortuneCookies() !== $this->getUser()){
+//            throw $this->createAccessDeniedException("you are not owner");
+//        }
+
+        $this->denyAccessUnlessGranted('EDIT');
 
         $stats = $cookieRepository->countNumberPrintedForCategory($category);
 

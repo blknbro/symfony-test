@@ -3,7 +3,8 @@
 {% block body %}
 
 
-    <h1 class="text-3xl p-5 text-center my-4 font-semibold"><span class="fa {{ category.iconKey }}"></span> {{ categoryName }} Fortunes</h1>
+    <h1 class="text-3xl p-5 text-center my-4 font-semibold"><span
+                class="fa {{ category.iconKey }}"></span> {{ categoryName }} Fortunes</h1>
     <div class="flex justify-center mb-16 px-4">
         <div>
             <table class="table-auto border mb-6">
@@ -31,10 +32,13 @@
                             {{ fortuneCookie.numberPrinted }} printed since {{ fortuneCookie.createdAt|date('M jS Y') }}
                         </td>
                     </tr>
+                    <img src="{{ fortuneCookie.owner.avatarUri }}" alt="photo">
+                    <p>{{ fortuneCookie.owner.displayName }}</p>
                 {% endfor %}
                 </tbody>
             </table>
-            <a class="text-slate-700 hover:text-slate-900 font-semibold" href="{{ path('app_fortune_home') }}"><i class="fa fa-angle-double-left"></i> Back to Fortune Categories</a>
+            <a class="text-slate-700 hover:text-slate-900 font-semibold" href="{{ path('app_fortune_home') }}"><i
+                        class="fa fa-angle-double-left"></i> Back to Fortune Categories</a>
         </div>
     </div>
 
